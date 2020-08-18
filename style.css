@@ -5,9 +5,57 @@
           box-sizing: border-box;
 }
 
+:root {
+  --card-size: calc(80vh / 4);
+}
+
+.game {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100vh;
+  background-color: #0D7796;
+}
+
+.cards {
+  height: 90vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (var(--card-size))[5];
+      grid-template-columns: repeat(5, var(--card-size));
+  -ms-grid-rows: (var(--card-size))[4];
+      grid-template-rows: repeat(4, var(--card-size));
+  grid-gap: 10px;
+}
+
 .card {
-  width: 250px;
-  height: 250px;
-  border: 3px solid #ccc;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 3rem;
+  color: #363636;
+  overflow: contain;
+}
+
+.card img {
+  max-width: 90%;
+  pointer-events: none;
 }
 /*# sourceMappingURL=style.css.map */
