@@ -3,6 +3,8 @@ const cardArea = document.querySelector('.cards');
 const newGameBtn = document.querySelector('#new-game');
 
 let numCards = 10;
+let lastClick;
+let clicks = 0;
 
 
 // Functions
@@ -42,13 +44,64 @@ function randomizeArray(array) {
     }
     return array;
 }
-
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 function handleClick(e) {
+    
+    let clicked = e.target;
+
+    // Event delegation
     if(!e.target.classList.contains('card')) {
         return;
     }
-    console.log(e.target.id);
+    
+    // Evaluate on every second click
+    if (clicks != 0 && clicks % 2 != 0) {
+        clicked.classList.add('show');
+        evaluate(lastClicked.id, clicked.id);
+    } else {
+        clicked.classList.add('show');
+    }
+    clicks++;
+    
+    
+
+    // async function something() {
+    //     console.log("this might take some time....");
+    //     await delay(5000);
+    //     console.log("done!")
+    // }
+
+    // something();
+
+    // async function setNewClicked() {
+    //     await delay(2000);
+    //     lastClicked = clicked;
+    // };
+    // setNewClicked();
+
+    // NB: Wait a second, then do this:
+    lastClicked = clicked;
+
+    function evaluate(a, b) {
+        a === b ? handleCorrect() : handleIncorrect();
+    }
+
+
+    function handleCorrect() {
+        console.log("Boo ya!");
+    }
+
+    async function handleIncorrect() {
+        console.log("Snarf!");
+        console.log(lastClicked, clicked);
+        await delay(1000);
+        lastClicked.classList.remove('show');
+        clicked.classList.remove('show');
+    }
 }
+
+
+
 
 // Event Listeners
 cardArea.addEventListener('click', handleClick);

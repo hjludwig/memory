@@ -32,5 +32,9 @@
     img {
         max-width: 90%;
         pointer-events: none;
+        opacity: 0.1;
     }
+}
+.card.show img {
+    opacity: 1;
 }
