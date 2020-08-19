@@ -52,6 +52,8 @@
   font-size: 3rem;
   color: #363636;
   overflow: contain;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 .card img {
@@ -62,5 +64,9 @@
 
 .card.show img {
   opacity: 1;
+}
+
+.card.remove {
+  opacity: 0;
 }
 /*# sourceMappingURL=style.css.map */

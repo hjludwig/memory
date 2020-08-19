@@ -58,45 +58,30 @@ function handleClick(e) {
     if (clicks != 0 && clicks % 2 != 0) {
         clicked.classList.add('show');
         evaluate(lastClicked.id, clicked.id);
+
     } else {
         clicked.classList.add('show');
+        lastClicked = clicked;
     }
     clicks++;
-    
-    
-
-    // async function something() {
-    //     console.log("this might take some time....");
-    //     await delay(5000);
-    //     console.log("done!")
-    // }
-
-    // something();
-
-    // async function setNewClicked() {
-    //     await delay(2000);
-    //     lastClicked = clicked;
-    // };
-    // setNewClicked();
-
-    // NB: Wait a second, then do this:
-    lastClicked = clicked;
 
     function evaluate(a, b) {
         a === b ? handleCorrect() : handleIncorrect();
     }
 
 
-    function handleCorrect() {
-        console.log("Boo ya!");
+    async function handleCorrect() {
+        await delay(1000);
+        lastClicked.classList.add('remove');
+        clicked.classList.add('remove');
     }
 
     async function handleIncorrect() {
-        console.log("Snarf!");
-        console.log(lastClicked, clicked);
         await delay(1000);
         lastClicked.classList.remove('show');
+        await delay(500);
         clicked.classList.remove('show');
+        lastClicked = clicked;
     }
 }
 

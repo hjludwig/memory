@@ -29,6 +29,7 @@
     font-size: 3rem;
     color: rgb(54, 54, 54);
     overflow: contain;
+    transition: all 0.25s ease;
     img {
         max-width: 90%;
         pointer-events: none;
@@ -37,4 +38,7 @@
 }
 .card.show img {
     opacity: 1;
+}
+.card.remove {
+    opacity: 0;
 }
