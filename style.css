@@ -38,8 +38,36 @@
   grid-gap: 10px;
 }
 
+.card-wrappper {
+  pointer-events: none;
+  -webkit-perspective: 500px;
+          perspective: 500px;
+}
+
 .card {
   background-color: white;
+  position: relative;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+}
+
+.card img {
+  max-width: 90%;
+  pointer-events: none;
+}
+
+.card .front, .card .back {
+  pointer-events: none;
+  position: absolute;
+  background-color: white;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -49,17 +77,20 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  font-size: 3rem;
-  color: #363636;
-  overflow: contain;
-  -webkit-transition: all 0.25s ease;
-  transition: all 0.25s ease;
 }
 
-.card img {
-  max-width: 90%;
-  pointer-events: none;
-  opacity: 0.1;
+.card .front img {
+  max-width: 50%;
+}
+
+.card .back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.card.show {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 
 .card.show img {

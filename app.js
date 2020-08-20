@@ -6,9 +6,9 @@ let numCards = 10;
 let lastClick;
 let clicks = 0;
 
-
 // Functions
 function startGame() {
+    
     generateCards(numCards);
 }
 
@@ -21,7 +21,12 @@ function generateCards(num) {
         // let subcards = [];
         for (let i=0; i < num; i++) {
             const markup = `
-                <div class='card' id='${i}'><img src="assets/card-${i+1}.png"/></div>
+            <div class='card-wrapper'>    
+                <div class='card' id='${i}'>
+                    <div class='front'><img src="assets/card-front.png"/></div>
+                    <div class='back'><img src="assets/card-${i+1}.png"/></div>
+                </div>
+            </div>
             `;
             cards.push(markup);
         };
@@ -45,17 +50,30 @@ function randomizeArray(array) {
     return array;
 }
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-function handleClick(e) {
-    
-    let clicked = e.target;
 
-    // Event delegation
-    if(!e.target.classList.contains('card')) {
+function handleClick(e) {
+    let clicked = e.target;    
+    
+    // Don't allow user to click same card twice
+    if (clicked.classList.contains('show')) {
         return;
     }
-    
+
+    clicks++;
+
+    // Don't allow user to click more than twice
+    if (clicks > 2) {
+        return;
+    }
+
+
+    // Event delegation
+    if(!clicked.classList.contains('card')) {
+        return;
+    }
+
     // Evaluate on every second click
-    if (clicks != 0 && clicks % 2 != 0) {
+    if (clicks != 1 && clicks % 2 === 0) {
         clicked.classList.add('show');
         evaluate(lastClicked.id, clicked.id);
 
@@ -63,7 +81,6 @@ function handleClick(e) {
         clicked.classList.add('show');
         lastClicked = clicked;
     }
-    clicks++;
 
     function evaluate(a, b) {
         a === b ? handleCorrect() : handleIncorrect();
@@ -74,6 +91,7 @@ function handleClick(e) {
         await delay(1000);
         lastClicked.classList.add('remove');
         clicked.classList.add('remove');
+        clicks = 0;
     }
 
     async function handleIncorrect() {
@@ -82,6 +100,7 @@ function handleClick(e) {
         await delay(500);
         clicked.classList.remove('show');
         lastClicked = clicked;
+        clicks = 0;
     }
 }
 
