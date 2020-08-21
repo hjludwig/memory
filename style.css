@@ -6,31 +6,87 @@
 }
 
 :root {
-  --card-size: calc(80vh / 4);
+  --card-size: calc(75vh / 4);
 }
 
 .game {
+  font-family: 'Hind Madurai', sans-serif;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -ms-grid-rows: 15% 85%;
+      grid-template-rows: 15% 85%;
+  height: 100vh;
+  background-color: #0D7796;
+}
+
+h1 {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 2;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 100vh;
-  background-color: #0D7796;
+  padding-right: 10%;
+  color: white;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.controls {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  grid-column-end: 3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding-left: 10%;
+}
+
+.controls button {
+  background: white;
+  border: none;
+  color: #0D7796;
+  padding: 0.5em 1em;
+  font-family: 'Hind Madurai', sans-serif;
+  font-size: 1.5em;
+  text-transform: lowercase;
+  cursor: pointer;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.controls button:focus, .controls button:active {
+  outline: none;
+}
+
+.controls button:hover {
+  background: transparent;
+  color: white;
+  -webkit-box-shadow: 0 0 0 3px white;
+          box-shadow: 0 0 0 3px white;
 }
 
 .cards {
-  height: 90vh;
+  grid-column: span 2;
   display: -ms-grid;
   display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-grid-columns: (var(--card-size))[5];
       grid-template-columns: repeat(5, var(--card-size));
   -ms-grid-rows: (var(--card-size))[4];

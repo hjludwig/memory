@@ -1,14 +1,20 @@
 // DOM Elements
 const cardArea = document.querySelector('.cards');
 const newGameBtn = document.querySelector('#new-game');
+const gameArea = document.querySelector('.game');
 
 let numCards = 10;
 let lastClick;
+let correct = 0;
 let clicks = 0;
 
 // Functions
 function startGame() {
-    
+    clicks = 0;
+    correct = 0;
+    if (document.querySelector('win')) {
+        document.querySelector('win').remove();
+    }
     generateCards(numCards);
 }
 
@@ -23,7 +29,7 @@ function generateCards(num) {
             const markup = `
             <div class='card-wrapper'>    
                 <div class='card' id='${i}'>
-                    <div class='front'><img src="assets/card-front.png"/></div>
+                    <div class='front'><img src="assets/card-front.png"/><p class="cheat">${i}</p></div>
                     <div class='back'><img src="assets/card-${i+1}.png"/></div>
                 </div>
             </div>
@@ -92,6 +98,9 @@ function handleClick(e) {
         lastClicked.classList.add('remove');
         clicked.classList.add('remove');
         clicks = 0;
+        correct++;
+        checkWin(correct);
+        
     }
 
     async function handleIncorrect() {
@@ -101,6 +110,17 @@ function handleClick(e) {
         clicked.classList.remove('show');
         lastClicked = clicked;
         clicks = 0;
+    }
+}
+function checkWin(num) {
+    if (num === cardArea.childElementCount / 2) {
+        let markup = `
+            <div class="win">
+                <p>You Win!</p>
+            </div>
+        `;
+        gameArea.insertAdjacentHTML('beforeend', markup);
+        // startGame();
     }
 }
 

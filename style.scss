@@ -4,19 +4,59 @@
     box-sizing: border-box;
 }
 :root {
-    --card-size: calc(80vh / 4);
+    --card-size: calc(75vh / 4);
 }
 .game {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
+    font-family: 'Hind Madurai', sans-serif;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 15% 85%;
     height: 100vh;
     background-color: #0D7796;
 }
+h1 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    display: flex;
+    align-items: center;
+    padding-right: 10%;
+    color: white;
+    justify-content: flex-end;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+.controls {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10%;
+    button {
+        background: white;
+        border: none;
+        color: #0D7796;
+        padding: 0.5em 1em;
+        font-family: 'Hind Madurai', sans-serif;
+        font-size: 1.5em;
+        text-transform: lowercase;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        &:focus, &:active {
+            outline: none;
+        }
+        &:hover {
+            background: transparent;
+            color: white;
+            box-shadow: 0 0 0 3px white;
+        }
+    }
+}
 .cards {
-    height: 90vh;
+    // height: 90vh;
+    grid-column: span 2;
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(5, var(--card-size));
     grid-template-rows: repeat(4, var(--card-size));
     grid-gap: 10px;
