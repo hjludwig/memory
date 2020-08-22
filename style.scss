@@ -14,7 +14,7 @@
     height: 100vh;
     background-color: #0D7796;
 }
-h1 {
+h1.title {
     grid-column-start: 1;
     grid-column-end: 2;
     display: flex;
@@ -94,6 +94,9 @@ h1 {
     .back {
         transform: rotateY(180deg);
     }
+    .cheat {
+        display: none;
+    }
 }
 .card.show {
     transform: rotateY(180deg);
@@ -103,4 +106,34 @@ h1 {
 }
 .card.remove {
     opacity: 0;
+}
+
+.win {
+    color: white;
+    background: #0D7796;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 85vh;
+
+    h1 {
+        font-size: 8em; 
+        animation: bounce-zoom 0.25s ease 2;
+    }
+}
+    
+
+@keyframes bounce-zoom {
+    from {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    to {
+        transform: scale(1);
+    }
 }

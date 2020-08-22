@@ -12,8 +12,11 @@ let clicks = 0;
 function startGame() {
     clicks = 0;
     correct = 0;
-    if (document.querySelector('win')) {
-        document.querySelector('win').remove();
+    
+    // If there's a win message from a previous game, clear it.
+    if (document.querySelector('.win')) {
+        console.log('Time to clear');
+        document.querySelector('.win').remove();
     }
     generateCards(numCards);
 }
@@ -59,6 +62,10 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 function handleClick(e) {
     let clicked = e.target;    
+    // Event delegation
+    if(!clicked.classList.contains('card')) {
+        return;
+    }
     
     // Don't allow user to click same card twice
     if (clicked.classList.contains('show')) {
@@ -73,10 +80,6 @@ function handleClick(e) {
     }
 
 
-    // Event delegation
-    if(!clicked.classList.contains('card')) {
-        return;
-    }
 
     // Evaluate on every second click
     if (clicks != 1 && clicks % 2 === 0) {
@@ -112,15 +115,15 @@ function handleClick(e) {
         clicks = 0;
     }
 }
-function checkWin(num) {
+async function checkWin(num) {
     if (num === cardArea.childElementCount / 2) {
+        let div = document.createElement('div');
+        div.classList.add('win');
         let markup = `
-            <div class="win">
-                <p>You Win!</p>
-            </div>
+            <h1>You Win!</h1>
         `;
-        gameArea.insertAdjacentHTML('beforeend', markup);
-        // startGame();
+        div.innerHTML = markup;
+        gameArea.appendChild(div);
     }
 }
 
@@ -130,3 +133,5 @@ function checkWin(num) {
 // Event Listeners
 cardArea.addEventListener('click', handleClick);
 newGameBtn.addEventListener('click', startGame);
+
+window.onload = startGame;
